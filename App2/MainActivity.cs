@@ -11,7 +11,6 @@ namespace App2
     [Activity(Label = "App2", MainLauncher = true, Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        int count = 1;
 
         protected override void OnCreate(Bundle bundle)
         {
@@ -22,9 +21,26 @@ namespace App2
 
             // Get our button from the layout resource,
             // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.MyButton);
+            Button button1 = FindViewById<Button>(Resource.Id.button1);
+            TextView label1 = FindViewById<TextView>(Resource.Id.textView1);
+            TextView label2 = FindViewById<TextView>(Resource.Id.textView2);
+            EditText textbox1 = FindViewById<EditText>(Resource.Id.editText1);
+            EditText textbox2 = FindViewById<EditText>(Resource.Id.editText2);
 
-            button.Click += delegate { button.Text = string.Format("{0} clicks!", count++); };
+            button1.Click += delegate {
+                if (textbox1.Text == "" )
+                    textbox1.Text = "0";
+                if (textbox2.Text == "")
+                    textbox2.Text = "0";
+                try
+                {
+                    label2.Text = "" + (Convert.ToInt64(textbox1.Text) + Convert.ToInt64(textbox2.Text));
+                }
+                catch
+                {
+                    label2.Text = "Error";
+                }    
+            };
         }
     }
 }
